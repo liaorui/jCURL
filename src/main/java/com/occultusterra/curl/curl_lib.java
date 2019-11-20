@@ -26,7 +26,7 @@ import com.sun.jna.*;
 import com.sun.jna.ptr.*;
 
 interface curl_lib extends Library {
-		curl_lib INSTANCE = (curl_lib)Native.loadLibrary("libCurl.dll", curl_lib.class);
+		curl_lib INSTANCE = (curl_lib)Native.loadLibrary("curl", curl_lib.class);
 		interface DataHandler extends Callback {
 			int handler(Pointer contents, int size, int nmemb, Pointer userp);
 		}
