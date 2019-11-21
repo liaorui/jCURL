@@ -29,11 +29,12 @@ import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 
 public class CURLMsg extends Structure {
-	public int msg;
-	public Pointer handle;
-	public CURLMsg_data data;
+    public int msg;
+    public Pointer handle;
+    public CURLMsg_data data;
 
-	@Override protected List<String> getFieldOrder() {
-		return Arrays.asList("msg", "handle", "data");
-	}
+    @Override
+    protected List<String> getFieldOrder() {
+        return Arrays.asList("msg", "handle", "data");
+    }
 }

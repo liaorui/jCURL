@@ -26,6 +26,6 @@ import com.sun.jna.Pointer;
 import com.sun.jna.Union;
 
 public class CURLMsg_data extends Union {
-	public Pointer whatever;
-	public int result;
+    public Pointer whatever;
+    public int result;
 }

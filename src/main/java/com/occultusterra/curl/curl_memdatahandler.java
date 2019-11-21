@@ -28,41 +28,42 @@ import java.io.IOException;
 import com.sun.jna.Pointer;
 
 class curl_memdatahandler implements curl_lib.DataHandler, AutoCloseable {
-	ByteArrayOutputStream data = new ByteArrayOutputStream();
+    ByteArrayOutputStream data = new ByteArrayOutputStream();
 
-	@Override public int handler(Pointer contents, int size, int nmemb, Pointer userp) {
-		int s=size*nmemb;
-		byte[] data = contents.getByteArray(0, s);
-		try {
-			this.data.write(data);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return data.length;
-	}
-	
-	public byte[] getData() {
-		return data.toByteArray();
-	}
-	
-	public String getString() {
-		return new String(data.toByteArray());
-	}
-	
-	public int getSize() {
-		return data.size();
-	}
-	
-	public void reset() {
-		data.reset();
-	}
+    @Override
+    public int handler(Pointer contents, int size, int nmemb, Pointer userp) {
+        int s = size * nmemb;
+        byte[] data = contents.getByteArray(0, s);
+        try {
+            this.data.write(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data.length;
+    }
 
-	@Override
-	public void close() {
-		try {
-			data.close();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+    public byte[] getData() {
+        return data.toByteArray();
+    }
+
+    public String getString() {
+        return new String(data.toByteArray());
+    }
+
+    public int getSize() {
+        return data.size();
+    }
+
+    public void reset() {
+        data.reset();
+    }
+
+    @Override
+    public void close() {
+        try {
+            data.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

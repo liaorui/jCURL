@@ -28,36 +28,37 @@ import java.io.IOException;
 import com.sun.jna.Pointer;
 
 class curl_filedatahandler implements curl_lib.DataHandler, AutoCloseable {
-	FileOutputStream f;
-	int written=0;
-	
-	curl_filedatahandler(String file) throws IOException {
-		f = new FileOutputStream(file, false);
-	}
-	
-	@Override
-	public int handler(Pointer contents, int size, int nmemb, Pointer userp) {
-		if(f == null)
-			return 0;
-		try {
-			f.write(contents.getByteArray(0, size*nmemb));
-			written += size*nmemb;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return size*nmemb;
-	}
-	
-	public int getSize() {
-		return written;
-	}
+    FileOutputStream f;
+    int written = 0;
 
-	@Override
-	public void close() {
-		try {
-			f.close();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+    curl_filedatahandler(String file) throws IOException {
+        f = new FileOutputStream(file, false);
+    }
+
+    @Override
+    public int handler(Pointer contents, int size, int nmemb, Pointer userp) {
+        if (f == null) {
+            return 0;
+        }
+        try {
+            f.write(contents.getByteArray(0, size * nmemb));
+            written += size * nmemb;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return size * nmemb;
+    }
+
+    public int getSize() {
+        return written;
+    }
+
+    @Override
+    public void close() {
+        try {
+            f.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

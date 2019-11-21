@@ -28,6 +28,15 @@ class curl_opts {
 	final static long CURL_HTTP_VERSION_1_0=1;
 	final static long CURL_HTTP_VERSION_1_1=2;
 	final static long CURL_HTTP_VERSION_2_0=3;
+
+	final static long CURL_SSLVERSION_DEFAULT=0;
+	final static long CURL_SSLVERSION_TLSv1=1;
+	final static long CURL_SSLVERSION_SSLv2=2;
+	final static long CURL_SSLVERSION_SSLv3=3;
+	final static long CURL_SSLVERSION_TLSv1_0=4;
+	final static long CURL_SSLVERSION_TLSv1_1=5;
+	final static long CURL_SSLVERSION_TLSv1_2=6;
+	final static long CURL_SSLVERSION_TLSv1_3=7;
 	
 	static final int CURLOPT_VERBOSE=41;
 	static final int CURLOPT_HEADER=42;
@@ -85,6 +94,8 @@ class curl_opts {
 	static final int CURLOPT_CAPATH=10097;
 	static final int CURLOPT_CRLFILE=10169;
 	static final int CURLOPT_FILETIME=69;
+	static final int CURLOPT_HTTP_VERSION=84;
+	static final int CURLOPT_SSL_VERSION=32;
 	
 	static final int CURLINFO_EFFECTIVE_URL=1048577;
 	static final int CURLINFO_RESPONSE_CODE=2097154;

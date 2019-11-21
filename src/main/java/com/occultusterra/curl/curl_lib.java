@@ -26,39 +26,67 @@ import com.sun.jna.*;
 import com.sun.jna.ptr.*;
 
 interface curl_lib extends Library {
-		curl_lib INSTANCE = (curl_lib)Native.loadLibrary("curl", curl_lib.class);
-		interface DataHandler extends Callback {
-			int handler(Pointer contents, int size, int nmemb, Pointer userp);
-		}
-		int curl_global_init(long flags);
-		/* Misc API */
-		String curl_version();
-		String curl_easy_escape(Pointer Handle, String string, int length);
-		String curl_easy_unescape(Pointer Handle, String url, int inlength, IntByReference outlength ); 
-		/* Linked Things */
-		int curl_formadd(PointerByReference firstitem, PointerByReference lastitem, Object... arguments);
-		void curl_formfree(Pointer form);
-		Pointer curl_slist_append(Pointer list, String string); 
-		void curl_slist_free_all(Pointer list);
-		/* Easy API */
-		Pointer curl_easy_init();
-		int curl_easy_cleanup(Pointer Handle);
-		int curl_easy_setopt(Pointer Handle, int option, Object parameter);
-		int curl_easy_setopt(Pointer Handle, int option, long parameter);
-		int curl_easy_getinfo(Pointer handle, int option, PointerByReference parameter); 
-		int curl_easy_getinfo(Pointer handle, int option, LongByReference parameter); 
-		int curl_easy_getinfo(Pointer handle, int option, DoubleByReference parameter); 
-		int curl_easy_perform(Pointer Handle);
-		String curl_easy_strerror(int errorNum);
-		void curl_free(Pointer p);
-		/* Multi API */
-		Pointer curl_multi_init();
-		int curl_multi_setopt(Pointer multi_handle, int option, Object parameter);
-		int curl_multi_setopt(Pointer multi_handle, int option, boolean bool); 
-		int curl_multi_add_handle(Pointer multi_handle, Pointer easy_handle);
-		int curl_multi_remove_handle(Pointer multi_handle, Pointer easy_handle);
-		int curl_multi_perform(Pointer multi_handle, IntByReference running_handles);
-		int curl_multi_cleanup(Pointer multi_handle);
-		CURLMsg curl_multi_info_read(Pointer multi_handle, IntByReference msgs_in_queue); 
-		String curl_multi_strerror(int errornum);
+    curl_lib INSTANCE = Native.load("curl", curl_lib.class);
+
+    interface DataHandler extends Callback {
+        int handler(Pointer contents, int size, int nmemb, Pointer userp);
+    }
+
+    int curl_global_init(long flags);
+
+    /* Misc API */
+    String curl_version();
+
+    String curl_easy_escape(Pointer Handle, String string, int length);
+
+    String curl_easy_unescape(Pointer Handle, String url, int inlength, IntByReference outlength);
+
+    /* Linked Things */
+    int curl_formadd(PointerByReference firstitem, PointerByReference lastitem, Object... arguments);
+
+    void curl_formfree(Pointer form);
+
+    Pointer curl_slist_append(Pointer list, String string);
+
+    void curl_slist_free_all(Pointer list);
+
+    /* Easy API */
+    Pointer curl_easy_init();
+
+    int curl_easy_cleanup(Pointer Handle);
+
+    int curl_easy_setopt(Pointer Handle, int option, Object parameter);
+
+    int curl_easy_setopt(Pointer Handle, int option, long parameter);
+
+    int curl_easy_getinfo(Pointer handle, int option, PointerByReference parameter);
+
+    int curl_easy_getinfo(Pointer handle, int option, LongByReference parameter);
+
+    int curl_easy_getinfo(Pointer handle, int option, DoubleByReference parameter);
+
+    int curl_easy_perform(Pointer Handle);
+
+    String curl_easy_strerror(int errorNum);
+
+    void curl_free(Pointer p);
+
+    /* Multi API */
+    Pointer curl_multi_init();
+
+    int curl_multi_setopt(Pointer multi_handle, int option, Object parameter);
+
+    int curl_multi_setopt(Pointer multi_handle, int option, boolean bool);
+
+    int curl_multi_add_handle(Pointer multi_handle, Pointer easy_handle);
+
+    int curl_multi_remove_handle(Pointer multi_handle, Pointer easy_handle);
+
+    int curl_multi_perform(Pointer multi_handle, IntByReference running_handles);
+
+    int curl_multi_cleanup(Pointer multi_handle);
+
+    CURLMsg curl_multi_info_read(Pointer multi_handle, IntByReference msgs_in_queue);
+
+    String curl_multi_strerror(int errornum);
 }
